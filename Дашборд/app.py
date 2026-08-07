@@ -75,7 +75,7 @@ from pathlib import Path
 @st.cache_data
 def load_data():
 
-    base_path = Path(__file__).parent
+    base_path = Path(__file__).resolve().parent
 
     df = pd.read_csv(base_path / "loan_portfolio_clean.csv")
     branch = pd.read_csv(base_path / "branch_reference.csv")
