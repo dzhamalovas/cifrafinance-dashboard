@@ -70,20 +70,20 @@ header{
 # ============================
 # DATA
 # ============================
-from pathlib import Path
-
 @st.cache_data
 def load_data():
 
-    base_path = Path(__file__).resolve().parent
+    df = pd.read_csv("loan_portfolio_clean.csv")
 
-    df = pd.read_csv(base_path / "loan_portfolio_clean.csv")
-    branch = pd.read_csv(base_path / "branch_reference.csv")
+    branch = pd.read_csv("branch_reference.csv")
 
-    df["issue_date"] = pd.to_datetime(df["issue_date"])
-    df["Quarter"] = df["issue_date"].dt.to_period("Q").astype(str)
+    df["issue_date"]=pd.to_datetime(df["issue_date"])
 
-    return df, branch
+    df["Quarter"]=df["issue_date"].dt.to_period("Q").astype(str)
+
+    return df,branch
+
+df,branch=load_data()
 
 # ============================
 # SIDEBAR
